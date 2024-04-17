@@ -61,21 +61,13 @@ func downloadFilesFromUrls(urlFilePath, downloadDirectory string, useTree bool, 
 }
 
 func readLines(path string) ([]string, error) {
-	file, err := os.Open(path)
+	content, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
-	defer file.Close()
-
-	var lines []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		line = strings.TrimRight(line, "\r")
-		lines = append(lines, line)
-	}
-	if err := scanner.Err(); err != nil {
-		return nil, err
+	lines := strings.Split(strings.TrimSpace(string(content)), "\n")
+	for i, line := range lines {
+		lines[i] = strings.Replace(line, "\r", "", -1) //Windows...
 	}
 	return lines, nil
 }
