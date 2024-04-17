@@ -81,7 +81,6 @@ func downloadFile(urlString, basePath string, useTree bool) {
 	var localPath string
 	if useTree {
 		localPath = filepath.Join(basePath, parsedUrl.Host, parsedUrl.Path)
-		// Проверяем, содержит ли путь файл с расширением .htm или .html
 		if !strings.HasSuffix(localPath, ".htm") && !strings.HasSuffix(localPath, ".html") {
 			if strings.HasSuffix(localPath, "/") {
 				localPath = filepath.Join(localPath, "index.html")
@@ -91,7 +90,6 @@ func downloadFile(urlString, basePath string, useTree bool) {
 		}
 	} else {
 		safeFileName := urlToFileName(parsedUrl.Host + parsedUrl.Path)
-		// Проверяем расширение файла, и добавляем .html, если его нет
 		if !strings.HasSuffix(safeFileName, ".htm") && !strings.HasSuffix(safeFileName, ".html") {
 			safeFileName += ".html"
 		}
