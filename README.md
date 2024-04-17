@@ -22,13 +22,13 @@ This project provides a Go-based tool for downloading files from URLs specified 
 Clone the repository to your local machine:
 
 \```bash
-git clone https://github.com/yourusername/url-file-downloader.git
+git clone https://github.com/gromozeka1980/GoExercise.git
 cd url-file-downloader
 \```
 
 ### Usage
 
-This program accepts command line arguments to specify the input file, output directory, and the directory structure type.
+This program accepts command line arguments to specify the input file, output directory, directory structure type, and number of concurrent workers (gorutines).
 
 #### Command Line Arguments
 
