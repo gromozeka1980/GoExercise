@@ -82,11 +82,7 @@ func downloadFile(urlString, basePath string, useTree bool) {
 	if useTree {
 		localPath = filepath.Join(basePath, parsedUrl.Host, parsedUrl.Path)
 		if !strings.HasSuffix(localPath, ".htm") && !strings.HasSuffix(localPath, ".html") {
-			if strings.HasSuffix(localPath, "/") {
-				localPath = filepath.Join(localPath, "index.html")
-			} else {
-				localPath = filepath.Join(localPath, "index.html")
-			}
+			localPath = filepath.Join(localPath, "index.html")
 		}
 	} else {
 		safeFileName := urlToFileName(parsedUrl.Host + parsedUrl.Path)
