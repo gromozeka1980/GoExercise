@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"flag"
 	"fmt"
 	"io"
@@ -82,14 +81,21 @@ func downloadFile(urlString, basePath string, useTree bool) {
 	var localPath string
 	if useTree {
 		localPath = filepath.Join(basePath, parsedUrl.Host, parsedUrl.Path)
-		if strings.HasSuffix(localPath, "/") {
-			localPath = filepath.Join(localPath, "index.html")
-		} else {
-			localPath = filepath.Join(filepath.Dir(localPath), filepath.Base(localPath), "index.html")
+		// Проверяем, содержит ли путь файл с расширением .htm или .html
+		if !strings.HasSuffix(localPath, ".htm") && !strings.HasSuffix(localPath, ".html") {
+			if strings.HasSuffix(localPath, "/") {
+				localPath = filepath.Join(localPath, "index.html")
+			} else {
+				localPath = filepath.Join(localPath, "index.html")
+			}
 		}
 	} else {
 		safeFileName := urlToFileName(parsedUrl.Host + parsedUrl.Path)
-		localPath = filepath.Join(basePath, safeFileName+".html")
+		// Проверяем расширение файла, и добавляем .html, если его нет
+		if !strings.HasSuffix(safeFileName, ".htm") && !strings.HasSuffix(safeFileName, ".html") {
+			safeFileName += ".html"
+		}
+		localPath = filepath.Join(basePath, safeFileName)
 	}
 
 	err = os.MkdirAll(filepath.Dir(localPath), 0755)
