@@ -23,7 +23,6 @@ Clone the repository to your local machine:
 
 \```bash
 git clone https://github.com/gromozeka1980/GoExercise.git
-cd url-file-downloader
 \```
 
 ### Usage
